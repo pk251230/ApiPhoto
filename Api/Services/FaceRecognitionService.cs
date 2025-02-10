@@ -1,4 +1,5 @@
-﻿using Api.Services;
+﻿using Api.Model;
+using Api.Services;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
@@ -120,29 +121,62 @@ public class FaceRecognitionService
 		var resizedImage = image.Resize(width, height, Inter.Linear);
 		return resizedImage;
 	}
-
-	public async Task<bool> CheckFacesAsync(Stream image1Stream)
+	public async Task<PhotoResponce> CheckFacesAsync(Stream image1Stream)
 	{
+		PhotoResponce response = new PhotoResponce
+		{
+			STATUS = false,
+			MESSAGE = "Something goes wrong, please try again later."
+		};
+
 		try
 		{
 			var img1 = ConvertStreamToImage(image1Stream);
-
 			var face1 = DetectFace(img1);
 
 			if (face1 == null)
 			{
 				Console.WriteLine("Face not detected in image.");
-				return false;
+				response.STATUS = false;
+				response.MESSAGE = "Face not detected in image.";
 			}
 			else
 			{
-				return true;
+				response.STATUS = true;
+				response.MESSAGE = "Face detected successfully.";
 			}
 		}
 		catch (Exception ex)
 		{
 			Console.WriteLine($"Error: {ex.Message}");
-			return false;
+			response.MESSAGE = ex.Message;
 		}
+
+		return response;
 	}
+
+	//public async Task<bool> CheckFacesAsync(Stream image1Stream)
+	//{
+	//	try
+	//	{
+	//		var img1 = ConvertStreamToImage(image1Stream);
+
+	//		var face1 = DetectFace(img1);
+
+	//		if (face1 == null)
+	//		{
+	//			Console.WriteLine("Face not detected in image.");
+	//			return false;
+	//		}
+	//		else
+	//		{
+	//			return true;
+	//		}
+	//	}
+	//	catch (Exception ex)
+	//	{
+	//		Console.WriteLine($"Error: {ex.Message}");
+	//		return false;
+	//	}
+	//}
 }

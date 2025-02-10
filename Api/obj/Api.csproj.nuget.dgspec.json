@@ -63,6 +63,14 @@
               "target": "Package",
               "version": "[4.10.0.5680, )"
             },
+            "NuGet.Protocol": {
+              "target": "Package",
+              "version": "[6.12.1, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
             "SixLabors.ImageSharp": {
               "target": "Package",
               "version": "[3.1.6, )"
