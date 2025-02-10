@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LdlngpyrSNw=",
+  "dgSpecHash": "nDL33o2AV78=",
   "success": true,
-  "projectFilePath": "D:\\Raja Mahendra Pratap Singh State University\\API\\Photo\\Api\\Api.csproj",
+  "projectFilePath": "D:\\DR BHIMRAO AMBEDKAR UNIVERSITY AGRA\\Git Project\\ApiPhoto\\Api\\Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pk251\\.nuget\\packages\\emgu.cv\\4.10.0.5680\\emgu.cv.4.10.0.5680.nupkg.sha512",
     "C:\\Users\\pk251\\.nuget\\packages\\emgu.cv.bitmap\\4.10.0.5680\\emgu.cv.bitmap.4.10.0.5680.nupkg.sha512",
