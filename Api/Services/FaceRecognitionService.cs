@@ -3,9 +3,7 @@ using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
-using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
-using System.Drawing;
 
 public class FaceRecognitionService
 {
@@ -77,7 +75,6 @@ public class FaceRecognitionService
 		imageStream.CopyTo(ms);
 		ms.Position = 0;
 
-		// Load the image using ImageSharp
 		var imageSharpImage = SixLabors.ImageSharp.Image.Load<Rgb24>(ms);
 		var bitmap = imageSharpImage.ToBgrByteImage();
 
@@ -88,7 +85,6 @@ public class FaceRecognitionService
 	{
 		var grayImage = image.Convert<Gray, byte>();
 
-		// Load multiple face cascades for better detection
 		var frontalFaceCascade = new CascadeClassifier("Services/haarcascades/haarcascade_frontalface_alt2.xml");
 		var profileFaceCascade = new CascadeClassifier("Services/haarcascades/haarcascade_profileface.xml");
 
@@ -100,14 +96,13 @@ public class FaceRecognitionService
 		}
 
 		if (faces.Length == 0)
-			return null; // No face detected
+			return null;
 
-		// Check for eyes in the detected face region
 		var faceROI = image.Copy(faces[0]);
 		if (!ContainsEyes(faceROI))
-			return null; // Reject if no eyes detected
+			return null; 
 
-		return faceROI.Convert<Bgr, byte>(); // Return detected human face
+		return faceROI.Convert<Bgr, byte>(); 
 	}
 
 	private bool ContainsEyes(Image<Bgr, byte> faceImage)
@@ -117,7 +112,7 @@ public class FaceRecognitionService
 
 		var eyes = eyeCascade.DetectMultiScale(grayFace, scaleFactor: 1.1, minNeighbors: 10, minSize: new System.Drawing.Size(15, 15));
 
-		return eyes.Length >= 1; // At least one eye must be detected
+		return eyes.Length >= 1;
 	}
 
 	private Image<Bgr, byte> ResizeImage(Image<Bgr, byte> image, int width, int height)
